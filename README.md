@@ -1,7 +1,7 @@
-# ZEPHYR-ML  
+# Z-Inference Engine  
 ### Explainable Journey Risk Intelligence Engine
 
-**ZEPHYR-ML** is an analytical machine learning framework designed to **predict and interpret travel risk at the route-segment level**.
+**Z-Inference Engine** is an analytical machine learning framework designed to **predict and interpret travel risk at the route-segment level**.
 
 Unlike traditional black-box risk systems, ZEPHYR-ML breaks predictions into **human-readable explanations**, showing *exactly why* a route segment is risky.
 
@@ -24,7 +24,7 @@ Travel risk is influenced by many interacting variables:
 
 Most existing systems output **binary decisions or opaque scores**, offering **no insight into why** a route is considered dangerous.
 
-### ZEPHYR-ML solves this by:
+### Z-Inference Engine solves this by:
 
 - Modeling risk as a **continuous score (0–100)**  
 - Breaking journeys into **individual route segments**  
@@ -56,7 +56,7 @@ Built as a **modular backend ML engine**, not a research notebook.
 
 ## Technical Differentiators
 
-ZEPHYR-ML prioritizes **interpretability, reliability, and robustness**.
+Z-Inference Engine prioritizes **interpretability, reliability, and robustness**.
 
 ### 🧠 Custom Synthetic Data  
 No dependency on external datasets. A custom engine simulates realistic Indian road environments.
@@ -77,7 +77,7 @@ Risk is modeled as a **continuous variable**, avoiding shortcuts of classificati
 
 ## High-Level Architecture
 
-ZEPHYR-ML follows a modular ML pipeline:
+Z-Inference Engine follows a modular ML pipeline:
 
 1. **Generation**  
    Synthetic route and environmental context creation  
