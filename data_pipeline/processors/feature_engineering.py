@@ -38,38 +38,40 @@ from .encoders import encode_road_type, encode_terrain
 
 
 
-def engineer_features(segment):
-
-    # this function takes a raw segment dict and returns ML ready features
-    # this function will be reused in training and inference
-    
-
-    hour = segment["hour"]
-    month = segment["month"]
+def engineer_features(segment: dict) -> dict:
 
 
-    features = {
-        
+    # convert enriched segment data into ML-ready features
+    # this must remain deterministic and inference-safe
 
-        "rain_risk": rain_to_risk(segment["rain_intensity"]),
 
-        "wind_risk": wind_to_risk(segment["wind_speed"]),
+    rain_risk = rain_to_risk(segment["rain_intensity"])
 
-        "visibility_risk": visibility_to_risk(segment["visibility"]),
+    wind_risk = wind_to_risk(segment["wind_speed"])
 
-        "slope_risk": slope_to_risk(segment["slope"]),
+    visibility_risk = visibility_to_risk(segment["visibility"])
 
+    slope_risk = slope_to_risk(segment["slope"])
+
+    night_flag = 1 if (segment["hour"] < 6 or segment["hour"] > 18) else 0
+
+    monsoon_flag = 1 if 6 <= segment["month"] <= 9 else 0
+
+    road_type_enc = encode_road_type(segment["road_type"])
+
+    terrain_enc = encode_terrain(segment["terrain_type"])
+
+
+    return {
+
+        "rain_risk": rain_risk,
+        "wind_risk": wind_risk,
+        "visibility_risk": visibility_risk,
+        "slope_risk": slope_risk,
         "traffic_risk_index": segment["traffic_risk_index"],
-
-        "night_flag": int(hour < 6 or hour > 18),
-
-        "monsoon_flag": int(6 <= month <= 9),
-
-        "road_type_enc": encode_road_type(segment["road_type"]),
-
-        "terrain_enc": encode_terrain(segment["terrain_type"])
-
-
+        "night_flag": night_flag,
+        "monsoon_flag": monsoon_flag,
+        "road_type_enc": road_type_enc,
+        "terrain_enc": terrain_enc,
+        
     }
-
-    return features
